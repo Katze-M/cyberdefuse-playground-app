@@ -2,7 +2,7 @@ import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
 import { z } from "zod";
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth/next";
+import { auth } from '@clerk/nextjs/server';
 
 // Simple in-memory rate limiter (per Edge isolate)
 const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
@@ -11,17 +11,15 @@ const MAX_REQUESTS_PER_WINDOW = 5;
 
 export async function POST(req: Request) {
   try {
-    // 1. Identify the user via NextAuth Session
-    const session = await getServerSession();
+    // 1. Identify the user via Clerk Auth
+    const { userId } = await auth();
     
-    if (!session || !session.user?.email) {
+    if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized: You must be logged in to deploy patches." },
         { status: 401 }
       );
     }
-    
-    const userId = session.user.email;
 
     // 2. Enforce Rate Limiting per User
     const now = Date.now();

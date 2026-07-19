@@ -14,7 +14,7 @@ import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-json";
 import "prismjs/themes/prism-twilight.css";
 
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useAuth, SignInButton, SignUpButton, UserButton, Show } from "@clerk/nextjs";
 
 interface MentorMessage {
   role: "mentor" | "system";
@@ -22,7 +22,7 @@ interface MentorMessage {
 }
 
 export default function Dashboard() {
-  const { data: session } = useSession();
+  const { isSignedIn } = useAuth();
   const [activeScenario, setActiveScenario] = useState<Scenario>(scenarios[0]);
   const [code, setCode] = useState(activeScenario.initialCode);
   const [animationState, setAnimationState] = useState<AnimationState>("breach");
@@ -48,7 +48,7 @@ export default function Dashboard() {
   };
 
   const deployPatch = async () => {
-    if (!session) {
+    if (!isSignedIn) {
       setMentorMessages(prev => [...prev, { role: "system", text: "ERROR: Authentication required to deploy patches." }]);
       return;
     }
@@ -115,29 +115,25 @@ export default function Dashboard() {
 
           <div className="h-8 w-px bg-[var(--color-cyber-border)]"></div>
 
-          {session ? (
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                {session.user?.image && (
-                  <img src={session.user.image} alt="Avatar" className="w-8 h-8 rounded-full border border-[var(--color-cyber-accent)]" />
-                )}
-                <span className="text-sm font-bold tracking-wider">{session.user?.name}</span>
-              </div>
-              <button 
-                onClick={() => signOut()}
-                className="text-xs font-bold uppercase tracking-widest text-[var(--color-cyber-muted)] hover:text-white transition-colors"
-              >
-                Logout
-              </button>
+          <Show when="signed-in">
+            <div className="flex items-center space-x-4 h-8">
+              <UserButton appearance={{ elements: { userButtonAvatarBox: "w-8 h-8 border border-[var(--color-cyber-accent)]" } }} />
             </div>
-          ) : (
-            <button 
-              onClick={() => signIn("google")}
-              className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-4 py-2 rounded font-bold tracking-wider text-sm transition-colors"
-            >
-              Login with Google
-            </button>
-          )}
+          </Show>
+          <Show when="signed-out">
+            <div className="flex items-center space-x-3">
+              <SignInButton mode="modal">
+                <button className="text-white hover:text-white/80 font-bold tracking-wider text-sm transition-colors">
+                  Log In
+                </button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <button className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-4 py-1.5 rounded font-bold tracking-wider text-sm transition-colors">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </div>
+          </Show>
         </div>
       </header>
 
