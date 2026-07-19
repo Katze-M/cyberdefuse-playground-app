@@ -64,7 +64,7 @@ export function AttackSimulation({ scenarioId, animationState }: { scenarioId: s
   const description = isPlaying ? animationData.description(step) : "";
 
   return (
-    <div className="flex-1 relative flex items-center justify-center p-6 bg-[var(--color-cyber-bg)] overflow-hidden transition-colors duration-1000 w-full h-full min-h-[300px]">
+    <div className="w-full min-h-[400px] lg:h-full bg-[var(--color-cyber-bg)] relative overflow-hidden flex items-center justify-center border-b lg:border-b-0 border-[var(--color-cyber-border)] p-6 transition-colors duration-1000">
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(var(--color-cyber-border)_1px,transparent_1px),linear-gradient(90deg,var(--color-cyber-border)_1px,transparent_1px)] bg-[size:20px_20px] opacity-20 z-0"></div>
       

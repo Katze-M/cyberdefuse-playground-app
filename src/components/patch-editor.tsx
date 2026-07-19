@@ -13,7 +13,7 @@ interface PatchEditorProps {
 
 export function PatchEditor({ code, setCode, activeScenario, isEvaluating, deployPatch }: PatchEditorProps) {
   return (
-    <div className="w-1/3 min-w-[400px] border-l border-[var(--color-cyber-border)] bg-[var(--color-cyber-bg)] flex flex-col h-full shadow-[-5px_0_15px_rgba(0,0,0,0.5)] z-10">
+    <div className="w-full lg:w-1/3 min-h-[500px] lg:min-h-0 border-t lg:border-l lg:border-t-0 border-[var(--color-cyber-border)] bg-[var(--color-cyber-bg)] flex flex-col z-10 shadow-[-5px_0_15px_rgba(0,0,0,0.5)]">
       <div className="p-3 border-b border-[var(--color-cyber-border)] bg-[var(--color-cyber-panel)] flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Code className="w-5 h-5 text-[var(--color-cyber-muted)]" />

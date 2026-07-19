@@ -14,7 +14,7 @@ interface MissionControlProps {
 
 export function MissionControl({ activeScenario, mentorMessages, isEvaluating }: MissionControlProps) {
   return (
-    <div className="w-1/3 min-w-[350px] border-r border-[var(--color-cyber-border)] bg-[var(--color-cyber-bg)] flex flex-col h-full z-10 shadow-[5px_0_15px_rgba(0,0,0,0.5)]">
+    <div className="w-full lg:w-1/4 min-h-[300px] lg:min-h-0 bg-[var(--color-cyber-bg)] border-b lg:border-r lg:border-b-0 border-[var(--color-cyber-border)] flex flex-col z-10 relative">
       <div className="p-4 border-b border-[var(--color-cyber-border)] flex items-center space-x-3 bg-[var(--color-cyber-panel)]">
         <div className="w-10 h-10 rounded-full bg-[var(--color-cyber-accent)]/20 flex items-center justify-center border border-[var(--color-cyber-accent)]">
           <Bot className="w-6 h-6 text-[var(--color-cyber-accent)]" />

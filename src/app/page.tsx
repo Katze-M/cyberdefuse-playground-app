@@ -73,9 +73,9 @@ export default function Dashboard() {
 
       const data = await response.json();
       
-      setMentorMessages(prev => [...prev, { role: "mentor", text: data.feedback }]);
+      setMentorMessages(prev => [...prev, { role: "mentor", text: data.feedbackMessage }]);
 
-      if (data.isSecure) {
+      if (data.isPatched) {
         setAnimationState("blocked");
       } else {
         setAnimationState("breach");
@@ -89,21 +89,21 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#0a0a0a] text-white overflow-hidden font-sans">
+    <div className="flex flex-col min-h-screen lg:h-screen bg-[#0a0a0a] text-white overflow-auto lg:overflow-hidden font-sans">
       {/* HEADER */}
-      <header className="h-16 border-b border-[var(--color-cyber-border)] bg-[var(--color-cyber-bg)] flex items-center justify-between px-6 z-20">
+      <header className="py-3 lg:py-0 lg:h-16 border-b border-[var(--color-cyber-border)] bg-[var(--color-cyber-bg)] flex flex-wrap gap-4 items-center justify-between px-4 lg:px-6 z-20">
         <div className="flex items-center space-x-3">
-          <Shield className="w-8 h-8 text-[var(--color-cyber-accent)] animate-pulse" />
-          <h1 className="text-xl font-bold tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-yellow-300">
+          <Shield className="w-6 h-6 lg:w-8 lg:h-8 text-[var(--color-cyber-accent)] animate-pulse" />
+          <h1 className="text-lg lg:text-xl font-bold tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-yellow-300">
             CyberDefuse_OS
           </h1>
         </div>
         
-        <div className="flex items-center space-x-6">
-          <div className="flex items-center space-x-2">
-            <div className="text-sm font-bold text-[var(--color-cyber-muted)] uppercase tracking-widest">Scenario:</div>
+        <div className="flex items-center space-x-4 lg:space-x-6 w-full lg:w-auto justify-between lg:justify-end">
+          <div className="flex items-center space-x-2 flex-1 lg:flex-none">
+            <div className="hidden sm:block text-sm font-bold text-[var(--color-cyber-muted)] uppercase tracking-widest">Scenario:</div>
             <select 
-              className="bg-[var(--color-cyber-panel)] border border-[var(--color-cyber-border)] text-[var(--color-cyber-text)] px-4 py-2 rounded focus:outline-none focus:border-[var(--color-cyber-accent)] appearance-none cursor-pointer text-sm"
+              className="bg-[var(--color-cyber-panel)] border border-[var(--color-cyber-border)] text-[var(--color-cyber-text)] px-2 lg:px-4 py-2 rounded focus:outline-none focus:border-[var(--color-cyber-accent)] appearance-none cursor-pointer text-xs lg:text-sm w-full lg:w-auto"
               value={activeScenario.id}
               onChange={(e) => setActiveScenario(scenarios.find(s => s.id === e.target.value) || scenarios[0])}
             >
@@ -113,7 +113,7 @@ export default function Dashboard() {
             </select>
           </div>
 
-          <div className="h-8 w-px bg-[var(--color-cyber-border)]"></div>
+          <div className="hidden lg:block h-8 w-px bg-[var(--color-cyber-border)]"></div>
 
           <Show when="signed-in">
             <div className="flex items-center space-x-4 h-8">
@@ -121,14 +121,14 @@ export default function Dashboard() {
             </div>
           </Show>
           <Show when="signed-out">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2 lg:space-x-3">
               <SignInButton mode="modal">
-                <button className="text-white hover:text-white/80 font-bold tracking-wider text-sm transition-colors">
+                <button className="text-white hover:text-white/80 font-bold tracking-wider text-xs lg:text-sm transition-colors whitespace-nowrap">
                   Log In
                 </button>
               </SignInButton>
               <SignUpButton mode="modal">
-                <button className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-4 py-1.5 rounded font-bold tracking-wider text-sm transition-colors">
+                <button className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-3 lg:px-4 py-1.5 rounded font-bold tracking-wider text-xs lg:text-sm transition-colors whitespace-nowrap">
                   Sign Up
                 </button>
               </SignUpButton>
@@ -138,7 +138,7 @@ export default function Dashboard() {
       </header>
 
       {/* MAIN WORKSPACE */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex flex-col lg:flex-row overflow-visible lg:overflow-hidden">
         
         {/* LEFT PANEL: Mentor Chat */}
         <MissionControl 

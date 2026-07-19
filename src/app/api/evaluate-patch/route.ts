@@ -90,7 +90,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json(
-      { error: "Failed to evaluate the patch." },
+      { error: `Failed to evaluate the patch: ${error?.message || String(error)}` },
       { status: 500 }
     );
   }
