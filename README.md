@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛡️ CyberDefuse OS
 
-## Getting Started
+**Live Demo:** [https://cyberdefuse-playground.vercel.app](https://cyberdefuse-playground.vercel.app)
 
-First, run the development server:
+An interactive, AI-powered cybersecurity simulator built to teach and test developers on identifying and patching critical system vulnerabilities. Complete with real-time attack animations, an AI mentor, and a fully functional code editor.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Interactive Attack Simulations**: Step-by-step visual animations of various attack vectors including S3 Bucket Exposure, SQL Injection, and Server-Side Request Forgery (SSRF).
+- **AI-Powered Code Evaluation**: Integrated with the Gemini 1.5 AI model to read, analyze, and grade user-submitted code patches dynamically.
+- **Built-in IDE**: A custom, responsive code editor supporting syntax highlighting for multiple languages (JSON, JavaScript).
+- **Secure Authentication**: End-to-end authentication and session management powered by Clerk, ensuring only logged-in users can deploy patches.
+- **Responsive Dashboard**: A sleek, dark-themed cyberpunk UI that fully scales to mobile devices for on-the-go learning.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Authentication**: [Clerk](https://clerk.com/)
+- **AI Integration**: [Google Gemini (AI SDK)](https://sdk.vercel.ai/providers/ai-sdk-providers/google-generative-ai)
+- **Editor**: [React Simple Code Editor](https://github.com/satya164/react-simple-code-editor) + [PrismJS](https://prismjs.com/)
+- **Deployment**: [Vercel](https://vercel.com/)
 
-## Learn More
+## 🚀 Getting Started Locally
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/cyberdefuse-playground.git
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Create a `.env.local` file in the root directory and add your API keys:
+   ```env
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+   GOOGLE_GENERATIVE_AI_API_KEY=your_gemini_api_key
+   ```
 
-## Deploy on Vercel
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
